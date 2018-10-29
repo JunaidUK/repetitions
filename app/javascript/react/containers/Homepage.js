@@ -10,14 +10,14 @@ class Homepage extends Component {
         lng: 85.948970
         },
         zoom: 11,
-        apikey:"AIzaSyC_MHkASVBo7Iq95eQdPxXROl-uZ70HYKE"
+        apikey:""
       }
     }
     render(){
       return(
         <div>
           <h1>This area will have more react components</h1>
-          <div style={{ height: '50vh', width: '100%' }}>
+          <div style={{ height: '50vh', width: '80%',float: 'right'}}>
            <GoogleMapReact
              bootstrapURLKeys={{key: this.state.apikey}}
              defaultCenter={this.state.center}

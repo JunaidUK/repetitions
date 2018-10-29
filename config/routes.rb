@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
-  devise_scope :user do
-    authenticated :user do
+  devise_for :athletes
+  devise_scope :athlete do
+    authenticated :athlete do
       root 'interfaces#index', as: :authenticated_root
     end
     unauthenticated do

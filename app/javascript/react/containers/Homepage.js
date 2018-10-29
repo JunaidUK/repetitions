@@ -10,7 +10,7 @@ class Homepage extends Component {
         lng: 85.948970
         },
         zoom: 11,
-        apikey:""
+        apikey:"AIzaSyC_MHkASVBo7Iq95eQdPxXROl-uZ70HYKE"
       }
     }
     render(){

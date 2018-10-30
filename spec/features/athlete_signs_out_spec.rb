@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user signs out', %Q{
+feature 'Athlete signs out', %Q{
   As an authenticated user
   I want to sign out
   So that my identity is forgotten about on the machine I'm using
@@ -10,13 +10,13 @@ feature 'user signs out', %Q{
   # * When I opt to sign out, I get a confirmation that my identity has been
   #   forgotten on the machine I'm using
 
-  scenario 'authenticated user signs out' do
-    user = FactoryBot.create(:user)
+  scenario 'authenticated athlete signs out' do
+    athlete = FactoryBot.create(:athlete)
 
-    visit new_user_session_path
+    visit new_athlete_session_path
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: athlete.email
+    fill_in 'Password', with: athlete.password
 
     click_button 'Log in'
 
@@ -26,7 +26,7 @@ feature 'user signs out', %Q{
     expect(page).to have_content('Signed out successfully')
   end
 
-  scenario 'unauthenticated user attempts to sign out' do
+  scenario 'unauthenticated athlete attempts to sign out' do
     visit '/'
     expect(page).to_not have_content('Sign Out')
   end

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+import SearchBox from '../components/SearchBox.js'
 
 class Homepage extends Component {
   constructor(props) {
@@ -16,14 +17,16 @@ class Homepage extends Component {
     render(){
       return(
         <div>
+          <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places"></script>
           <h1>This area will have more react components</h1>
-          <div style={{ height: '50vh', width: '100%' }}>
-           <GoogleMapReact
-             bootstrapURLKeys={{key: this.state.apikey}}
-             defaultCenter={this.state.center}
-             defaultZoom={this.state.zoom}
-           >
-           </GoogleMapReact>
+          <div style={{ height: '50vh', width: '80%',float: 'right'}}>
+            <SearchBox />
+             <GoogleMapReact
+               bootstrapURLKeys={{key: this.state.apikey}}
+               defaultCenter={this.state.center}
+               defaultZoom={this.state.zoom}
+             >
+             </GoogleMapReact>
           </div>
         </div>)
     }

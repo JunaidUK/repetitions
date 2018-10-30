@@ -20,7 +20,6 @@ class Homepage extends Component {
           <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places"></script>
           <h1>This area will have more react components</h1>
           <div style={{ height: '50vh', width: '80%',float: 'right'}}>
-            <SearchBox />
              <GoogleMapReact
                bootstrapURLKeys={{key: this.state.apikey}}
                defaultCenter={this.state.center}

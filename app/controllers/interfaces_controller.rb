@@ -5,4 +5,8 @@ class InterfacesController < ApplicationController
 
   end
 
+  def edit
+
+  end
+
 end

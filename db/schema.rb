@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_005721) do
+ActiveRecord::Schema.define(version: 2018_10_30_162417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2018_10_30_005721) do
     t.index ["athlete_id"], name: "index_equipments_on_athlete_id"
   end
 
+  create_table "exercises", force: :cascade do |t|
+    t.bigint "athlete_id", null: false
+    t.bigint "sport_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id"], name: "index_exercises_on_athlete_id"
+    t.index ["sport_id"], name: "index_exercises_on_sport_id"
+  end
+
   create_table "practices", force: :cascade do |t|
     t.float "latitude"
     t.float "longitude"
@@ -51,6 +60,16 @@ ActiveRecord::Schema.define(version: 2018_10_30_005721) do
     t.datetime "updated_at", null: false
     t.index ["athlete_id"], name: "index_practices_on_athlete_id"
     t.index ["sport_id"], name: "index_practices_on_sport_id"
+  end
+
+  create_table "signups", force: :cascade do |t|
+    t.bigint "athlete_id", null: false
+    t.bigint "practice_id", null: false
+    t.boolean "owner", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id"], name: "index_signups_on_athlete_id"
+    t.index ["practice_id"], name: "index_signups_on_practice_id"
   end
 
   create_table "sports", force: :cascade do |t|

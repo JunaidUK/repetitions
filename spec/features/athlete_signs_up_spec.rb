@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user registers', %Q{
+feature 'Athlete registers', %Q{
   As a visitor
   I want to register
   So that I can create an account
@@ -13,8 +13,10 @@ feature 'user registers', %Q{
   #   an error message
 
   scenario 'provide valid registration information' do
-    visit new_user_registration_path
-
+    visit new_athlete_registration_path
+    
+    fill_in 'First Name', with: 'Junaid'
+    fill_in 'Last Name', with: 'Siddiqui'
     fill_in 'Email', with: 'john@example.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
@@ -26,7 +28,7 @@ feature 'user registers', %Q{
   end
 
   scenario 'provide invalid registration information' do
-    visit new_user_registration_path
+    visit new_athlete_registration_path
 
     click_button 'Sign up'
     expect(page).to have_content("can't be blank")

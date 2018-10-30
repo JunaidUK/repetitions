@@ -1,0 +1,3 @@
+class Practice < ActiveRecord
+
+end

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, IndexRoute, Router, browserHistory } from 'react-router'
 import Homepage from '../containers/Homepage'
+import AthleteDash from '../containers/AthleteDash'
 
 export const App = (props) => {
   return (
@@ -8,6 +9,7 @@ export const App = (props) => {
       <Router history={browserHistory}>
         <Route path='/interfaces' component={Homepage} />
         <Route path='/' component={Homepage} />
+        <Route path='/interfaces/1/edit' component={AthleteDash} />
       </Router>
     </div>
   )

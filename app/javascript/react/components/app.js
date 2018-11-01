@@ -9,7 +9,6 @@ export const App = (props) => {
       <Router history={browserHistory}>
         <Route path='/interfaces' component={Homepage} />
         <Route path='/' component={Homepage} />
-        <Route path='/interfaces/1/edit' component={AthleteDash} />
       </Router>
     </div>
   )

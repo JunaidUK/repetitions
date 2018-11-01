@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :athletes
       resources :sports
       resources :exercises
+      resources :equipments
     end
   end
 

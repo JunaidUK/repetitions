@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+
 import SearchBox from '../components/SearchBox.js'
+import AthleteDash from './AthleteDash'
 
 class Homepage extends Component {
   constructor(props) {
@@ -14,6 +16,9 @@ class Homepage extends Component {
         apikey:""
       }
     }
+
+
+
     render(){
       return(
         <div>
@@ -26,6 +31,9 @@ class Homepage extends Component {
                defaultZoom={this.state.zoom}
              >
              </GoogleMapReact>
+          </div>
+          <div id="athlete-dashboard">
+            <AthleteDash />
           </div>
         </div>)
     }

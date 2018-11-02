@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+import Button from "@material-ui/core/Button";
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 import AthleteDash from './AthleteDash'
 
@@ -42,24 +45,27 @@ class Homepage extends Component {
     render(){
       return(
         <div>
-          <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places"></script>
-          <h6>This area will have more react components</h6>
-          <div style={{ height: '50vh', width: '80%',float: 'right'}}>
-             <GoogleMapReact
-               bootstrapURLKeys={{key: this.state.apikey}}
-               center={this.state.center}
-               defaultZoom={this.state.zoom}
-             >
-             </GoogleMapReact>
+          <div className="row">
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places"></script>
+              <div style={{ height: '50vh', width: '80%',float: 'right'}}>
+                <GoogleMapReact
+                  bootstrapURLKeys={{key: this.state.apikey}}
+                  center={this.state.center}
+                  defaultZoom={this.state.zoom}
+                  >
+                </GoogleMapReact>
+              </div>
+            <Button variant="contained" color="primary" onClick={this.athleteDashView} >
+              ATHLETE DASH
+            </Button>
           </div>
-          <button onClick={this.athleteDashView} >
-            Athlete Dash
-          </button>
-          <div id="athlete-dashboard">
-            {this.state.athleteHidden &&
-              <AthleteDash
-                changeMapCenterLocation={this.changeMapCenterLocation}
-              />}
+          <div className="row">
+            <div id="athlete-dashboard">
+              {this.state.athleteHidden &&
+                <AthleteDash
+                  changeMapCenterLocation={this.changeMapCenterLocation}
+                  />}
+            </div>
           </div>
         </div>)
     }

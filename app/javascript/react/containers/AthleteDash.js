@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
 import PlacesAutocomplete from 'react-places-autocomplete';
+import Button from "@material-ui/core/Button";
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import ExercisesForm from '../components/ExercisesForm'
 import EquipmentForm from '../components/EquipmentForm'
@@ -12,6 +24,7 @@ class AthleteDash extends Component {
     this.state = {
       currentAthlete:{},
       equipments: [],
+      sports: [],
       equipment: "",
       athleteEditHidden: false
     }
@@ -36,7 +49,7 @@ class AthleteDash extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({currentAthlete: body.athlete})
+      return this.setState({currentAthlete: body.athlete, equipments: body.athlete.equipments, sports: body.athlete.sports})
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -70,7 +83,7 @@ class AthleteDash extends Component {
 
   equipmentSubmitHandler(event){
     event.preventDefault()
-    payload = {
+    let payload = {
       name: this.state.equipment,
       athlete_id: this.state.currentAthlete.id
     }
@@ -95,7 +108,7 @@ class AthleteDash extends Component {
     .then(response => response.json())
     .then(body => {
       let newEquipments = this.state.currentAthlete.equipments.concat(body)
-      this.setState({equipments: newEquipment})
+      this.setState({equipments: newEquipments})
     })
     .catch(error => console.error('Error:', error));
   }
@@ -140,15 +153,57 @@ class AthleteDash extends Component {
     }
   }
 
-
   render(){
+    let athleteSports = this.state.sports.map((sport)=>{
+      let sportName = sport.name
+      return(<ListItem key={sport.sport_id}>
+              <ListItemText
+                primary={sportName}
+              />
+              <ListItemSecondaryAction>
+                <IconButton aria-label="Delete">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>)
+        })
+    let athleteEquipments = this.state.equipments.map((equipment)=>{
+      let equipmentName = equipment.name
+      return(<ListItem key={equipment.id}>
+              <ListItemText
+                primary={equipmentName}
+              />
+              <ListItemSecondaryAction>
+                <IconButton aria-label="Delete">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>)
+        })
+
     return(
       <div>
-        <div id="athlete-information" className="row">
-          <h6>This is the area for athlete information</h6>
-          <button onClick={this.athleteEditView} >
-          Edit Athlete
-          </button>
+        <div id="athlete-attributes" className="row">
+          <div className="column large-4">
+          <h6>THERE WILL BE ATHLETE INFORMATION HERE</h6>
+            <FormLabel component="legend">EDIT ATHLETE INFORMATION</FormLabel>
+              <FormControlLabel
+                control={
+                  <Switch checked={this.state.athleteEditHidden} onChange={this.athleteEditView} aria-label="LoginSwitch" />
+                }
+                label={this.state.athleteEditHidden ? 'Close' : 'Open'}
+              />
+          </div>
+          <div className="column large-4">
+            <List dense={false}>
+              {athleteSports}
+            </List>
+          </div>
+          <div className="column large-4">
+            <List dense={false}>
+              {athleteEquipments}
+            </List>
+          </div>
         </div>
 
         <div id="athlete-profile-forms" className="row">
@@ -156,6 +211,7 @@ class AthleteDash extends Component {
             this.state.athleteEditHidden &&
             <EquipmentForm
             equipmentChangeHandler={this.equipmentChangeHandler}
+            equipmentSubmitHandler={this.equipmentSubmitHandler}
             />
           }
           {

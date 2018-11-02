@@ -3,7 +3,7 @@ class Api::V1::ExercisesController < ApplicationController
   def create
     @exercise = Exercise.new(exercise_params)
     if @exercise.save
-      render json: @exercise
+      render json: Sport.find(exercise_params[:sport_id])
     else
       redirect_to "/interfaces/1/edit"
     end

@@ -54,7 +54,7 @@ class ExercisesForm extends Component {
     })
 
     return(
-      <div>
+      <div className="column large-4">
         <form className="form" id="sports-form">
           <label>
           Select a sport to add to your profile:

@@ -2,7 +2,7 @@ import React from 'react'
 
 const EquipmentForm = (props) => {
   return(
-    <div>
+    <div className="column large-4">
       <form className="form" id="sports-form">
         <label>
         Add equipment to your profile:

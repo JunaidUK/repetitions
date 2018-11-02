@@ -10,4 +10,14 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :interfaces, only: [:index,:edit]
+
+  namespace :api do
+    namespace :v1 do
+      resources :athletes
+      resources :sports
+      resources :exercises
+      resources :equipments
+    end
+  end
+
 end

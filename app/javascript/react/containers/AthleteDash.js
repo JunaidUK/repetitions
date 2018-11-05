@@ -17,7 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ExercisesForm from '../components/ExercisesForm'
 import EquipmentForm from '../components/EquipmentForm'
 import LocationSearchInput from '../components/LocationSearchInput'
-import DeleteContainer from '../components/DeleteContainer'
+import DeleteContainer from '../containers/DeleteContainer'
 
 class AthleteDash extends Component {
   constructor(props) {
@@ -52,7 +52,14 @@ class AthleteDash extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      return this.setState({currentAthlete: body.athlete, equipments: body.athlete.equipments, sports: body.athlete.sports, exercises: body.athlete.exercises})
+      this.setState({currentAthlete: body.athlete, equipments: body.athlete.equipments, sports: body.athlete.sports, exercises: body.athlete.exercises})
+      if (body.athlete.longitude != null && body.athlete.latitude != null){
+        let payload = {
+          lng: body.athlete.longitude,
+          lat: body.athlete.latitude
+        }
+        this.props.changeMapCenterLocation(payload)
+      }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -181,21 +188,19 @@ class AthleteDash extends Component {
    })
   }
 
-  deleteEquipment(id) {
-   fetch(`/api/v1/equipments/${id}`, {
-    method: 'DELETE',
-    headers: {
-     'Accept': 'application/json',
-     'Content-Type': 'application/json' },
-    credentials: 'same-origin'
-   })
-   .then(response => response.json())
-   .then(body => {
-     this.setState({equipments: body})
-   })
-   .catch(error => {
-    console.log(error)
-   })
+  deleteEquipment(id){
+    fetch(`/api/v1/equipments/${id}`, {
+      method: 'DELETE',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json' },
+      credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(body => {
+    this.setState({equipments: body})
+    })
+    .catch(error => {console.log(error)})
   }
 
   render(){
@@ -265,22 +270,19 @@ class AthleteDash extends Component {
         <div id="athlete-profile-forms" className="row">
           {
             this.state.athleteEditHidden &&
-            <EquipmentForm
-            equipmentChangeHandler={this.equipmentChangeHandler}
-            equipmentSubmitHandler={this.equipmentSubmitHandler}
-            />
-          }
-          {
-            this.state.athleteEditHidden &&
-            <ExercisesForm
-            currentAthleteId={this.state.currentAthlete.id}
-            exerciseSubmitHandler={this.exerciseSubmitHandler}
-            />
-          }
-          {
-            this.state.athleteEditHidden &&
-            <LocationSearchInput
-            changeAthleteLocation={this.changeAthleteLocation}/>
+            <div>
+              <EquipmentForm
+                equipmentChangeHandler={this.equipmentChangeHandler}
+                equipmentSubmitHandler={this.equipmentSubmitHandler}
+              />
+              <ExercisesForm
+                currentAthleteId={this.state.currentAthlete.id}
+                exerciseSubmitHandler={this.exerciseSubmitHandler}
+              />
+              <LocationSearchInput
+                changeAthleteLocation={this.changeAthleteLocation}
+              />
+            </div>
           }
         </div>
       </div>)

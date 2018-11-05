@@ -17,6 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ExercisesForm from '../components/ExercisesForm'
 import EquipmentForm from '../components/EquipmentForm'
 import LocationSearchInput from '../components/LocationSearchInput'
+import DeleteContainer from '../components/DeleteContainer'
 
 class AthleteDash extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class AthleteDash extends Component {
     this.state = {
       currentAthlete:{},
       equipments: [],
+      exercises: [],
       sports: [],
       equipment: "",
       athleteEditHidden: false
@@ -31,9 +33,10 @@ class AthleteDash extends Component {
     this.exerciseSubmitHandler = this.exerciseSubmitHandler.bind(this)
     this.equipmentSubmitHandler = this.equipmentSubmitHandler.bind(this)
     this.equipmentChangeHandler = this.equipmentChangeHandler.bind(this)
+    this.deleteExercise = this.deleteExercise.bind(this)
+    this.deleteEquipment = this.deleteEquipment.bind(this)
     this.athleteEditView = this.athleteEditView.bind(this)
     this.changeAthleteLocation = this.changeAthleteLocation.bind(this)
-
   }
 
   componentDidMount(){
@@ -49,7 +52,7 @@ class AthleteDash extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      return this.setState({currentAthlete: body.athlete, equipments: body.athlete.equipments, sports: body.athlete.sports})
+      return this.setState({currentAthlete: body.athlete, equipments: body.athlete.equipments, sports: body.athlete.sports, exercises: body.athlete.exercises})
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -153,20 +156,65 @@ class AthleteDash extends Component {
     }
   }
 
+  deleteExercise(id) {
+    let deleteExerciseId = this.state.exercises.filter((exercise)=>{
+      return exercise.sport_id == id
+    })
+   fetch(`/api/v1/exercises/${deleteExerciseId[0].id}`, {
+    method: 'DELETE',
+    headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/json' },
+    credentials: 'same-origin'
+   })
+   .then(response => response.json())
+   .then(body => {
+     let newSports = this.state.sports.filter(sport => {
+      return(
+       sport.id !== body.id
+      )
+     })
+     this.setState({sports: newSports})
+   })
+   .catch(error => {
+    console.log(error)
+   })
+  }
+
+  deleteEquipment(id) {
+   fetch(`/api/v1/equipments/${id}`, {
+    method: 'DELETE',
+    headers: {
+     'Accept': 'application/json',
+     'Content-Type': 'application/json' },
+    credentials: 'same-origin'
+   })
+   .then(response => response.json())
+   .then(body => {
+     this.setState({equipments: body})
+   })
+   .catch(error => {
+    console.log(error)
+   })
+  }
+
   render(){
     let athleteSports = this.state.sports.map((sport)=>{
       let sportName = sport.name
-      return(<ListItem key={sport.sport_id}>
+      return(<ListItem key={sport.id}>
               <ListItemText
                 primary={sportName}
               />
               <ListItemSecondaryAction>
                 <IconButton aria-label="Delete">
-                  <DeleteIcon />
+                  <DeleteContainer
+                    deleteMethod={this.deleteExercise}
+                    deleteId={sport.id}
+                  />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>)
-        })
+    })
     let athleteEquipments = this.state.equipments.map((equipment)=>{
       let equipmentName = equipment.name
       return(<ListItem key={equipment.id}>
@@ -175,17 +223,23 @@ class AthleteDash extends Component {
               />
               <ListItemSecondaryAction>
                 <IconButton aria-label="Delete">
-                  <DeleteIcon />
+                <DeleteContainer
+                  deleteMethod={this.deleteEquipment}
+                  deleteId={equipment.id}
+                />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>)
         })
-
     return(
       <div>
         <div id="athlete-attributes" className="row">
           <div className="column large-4">
-          <h6>THERE WILL BE ATHLETE INFORMATION HERE</h6>
+            <div>
+              <h5 id="athlete-information-subheaders">Athlete Information</h5>
+              <h6>{`${this.state.currentAthlete.first_name} ${this.state.currentAthlete.last_name}`}</h6>
+              <p>{this.state.currentAthlete.email}</p>
+            </div>
             <FormLabel component="legend">EDIT ATHLETE INFORMATION</FormLabel>
               <FormControlLabel
                 control={
@@ -193,19 +247,21 @@ class AthleteDash extends Component {
                 }
                 label={this.state.athleteEditHidden ? 'Close' : 'Open'}
               />
+              <a href="/athletes/edit">Edit Personal Information</a>
           </div>
           <div className="column large-4">
+            <h5 id="athlete-information-subheaders">Athlete Sports</h5>
             <List dense={false}>
               {athleteSports}
             </List>
           </div>
           <div className="column large-4">
+            <h5 id="athlete-information-subheaders">Athlete Equipment</h5>
             <List dense={false}>
               {athleteEquipments}
             </List>
           </div>
         </div>
-
         <div id="athlete-profile-forms" className="row">
           {
             this.state.athleteEditHidden &&

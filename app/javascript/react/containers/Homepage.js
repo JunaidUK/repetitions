@@ -14,7 +14,7 @@ class Homepage extends Component {
         lat: 26.092891,
         lng: 85.948970
         },
-        zoom: 11,
+        zoom: 13,
         apikey:"",
         athleteHidden: false
       }

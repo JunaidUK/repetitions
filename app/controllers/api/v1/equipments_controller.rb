@@ -5,7 +5,16 @@ class Api::V1::EquipmentsController < ApplicationController
     if @equipment.save
       render json: @equipment
     else
-      redirect_to "/interfaces/1/edit"
+      redirect_to "/"
+    end
+  end
+
+  def destroy
+    @equipment = Equipment.find(params["id"])
+    if @equipment.destroy
+      render json: Equipment.all
+    else
+      redirect_to "/"
     end
   end
 

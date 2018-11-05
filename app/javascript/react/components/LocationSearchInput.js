@@ -29,7 +29,7 @@ class LocationSearchInput extends React.Component {
     return (
     <div className="column large-4">
     <label>
-    Add a location to your profile
+    Add or Change your profile location 
       <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}

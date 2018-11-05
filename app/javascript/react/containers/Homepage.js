@@ -14,13 +14,12 @@ class Homepage extends Component {
         lat: 26.092891,
         lng: 85.948970
         },
-        zoom: 11,
+        zoom: 13,
         apikey:"",
         athleteHidden: false
       }
       this.athleteDashView = this.athleteDashView.bind(this)
       this.changeMapCenterLocation = this.changeMapCenterLocation.bind(this)
-      // this.reactRenderInitialLocation = this.reactRenderInitialLocation.bind(this)
     }
 
     athleteDashView(){
@@ -31,17 +30,6 @@ class Homepage extends Component {
       this.setState({center: geoLocale})
     }
 
-    // reactRenderInitialLocation(athlete){
-    //   if (athlete != {} && athlete.latitude != null && athlete.longitude != null){
-    //     let geoLocale = {
-    //         lat: athlete.longitude,
-    //         lng: athlete.latitude
-    //
-    //     }
-    //     this.changeMapCenterLocation(geoLocale)
-    //   }
-    // }
-    // reactRenderInitialLocation={this.reactRenderInitialLocation}
     render(){
       return(
         <div>

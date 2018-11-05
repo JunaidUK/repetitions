@@ -5,7 +5,17 @@ class Api::V1::ExercisesController < ApplicationController
     if @exercise.save
       render json: Sport.find(exercise_params[:sport_id])
     else
-      redirect_to "/interfaces/1/edit"
+      redirect_to "/"
+    end
+  end
+
+  def destroy
+    @exercise = Exercise.find(params["id"])
+    @sport = Sport.find(@exercise.sport_id)
+    if @exercise.destroy
+      render json: @sport
+    else
+      redirect_to '/'
     end
   end
 

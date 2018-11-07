@@ -47,7 +47,6 @@ class PracticesContainer extends Component {
         Athlete: {athlete.first_name} {athlete.last_name}
         </Typography>)
       })
-      debugger
     return(
       <ListItem key={practice.id}>
         <Paper>

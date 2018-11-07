@@ -241,7 +241,7 @@ class AthleteDash extends Component {
         <div id="athlete-attributes" className="row">
           <div className="column large-4">
             <div>
-              <h5 id="athlete-information-subheaders">Athlete Information</h5>
+              <h5 id="athlete-information-subheaders">Information</h5>
               <h6>{`${this.state.currentAthlete.first_name} ${this.state.currentAthlete.last_name}`}</h6>
               <p>{this.state.currentAthlete.email}</p>
             </div>

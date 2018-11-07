@@ -30,7 +30,7 @@ class PracticesContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({practices: body})
+      this.setState({practices: body.practices})
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -41,21 +41,25 @@ class PracticesContainer extends Component {
   }
 
   render(){
-  let practiceList = this.state.practices.map((practice)=>{
+    let practiceList = this.state.practices.map((practice)=>{
+      let athleteNames = practice.athletes.map((athlete)=>{
+        return(<Typography component="p" key={practice.id}>
+        Athlete: {athlete.first_name} {athlete.last_name}
+        </Typography>)
+      })
+      debugger
     return(
       <ListItem key={practice.id}>
         <Paper>
           <Typography variant="h5" component="h3">
+            {practice.sport.name}
+          </Typography>
+          {athleteNames}
+          <Typography component="p">
             {practice.location}
           </Typography>
           <Typography component="p">
-            Athlete ID: {practice.athlete_id}
-          </Typography>
-          <Typography component="p">
-            Sport ID: {practice.sport_id}
-          </Typography>
-          <Typography component="p">
-            Time: {practice.date_time}
+            Time - {practice.date_time}
           </Typography>
         </Paper>
       </ListItem>)

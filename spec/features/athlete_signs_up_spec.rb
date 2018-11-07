@@ -14,7 +14,7 @@ feature 'Athlete registers', %Q{
 
   scenario 'provide valid registration information' do
     visit new_athlete_registration_path
-    
+
     fill_in 'First Name', with: 'Junaid'
     fill_in 'Last Name', with: 'Siddiqui'
     fill_in 'Email', with: 'john@example.com'
@@ -24,7 +24,7 @@ feature 'Athlete registers', %Q{
     click_button 'Sign up'
 
     expect(page).to have_content('Welcome! You have signed up successfully.')
-    expect(page).to have_content('Sign Out')
+    expect(page).to have_content('SIGN OUT')
   end
 
   scenario 'provide invalid registration information' do

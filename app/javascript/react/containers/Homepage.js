@@ -20,10 +20,8 @@ class Homepage extends Component {
           lng: 85.948970
         },
         zoom: 13,
-        apikey:"",
-        athleteHidden: false,
+        apikey:""
       }
-      this.athleteDashView = this.athleteDashView.bind(this)
       this.changeMapCenterLocation = this.changeMapCenterLocation.bind(this)
     }
 

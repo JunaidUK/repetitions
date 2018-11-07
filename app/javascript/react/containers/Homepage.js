@@ -1,24 +1,27 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
-import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import AthleteDash from './AthleteDash'
+import PracticesContainer from './PracticesContainer'
 
 class Homepage extends Component {
   constructor(props) {
       super(props)
       this.state = {
         center:{
-        lat: 26.092891,
-        lng: 85.948970
+          lat: 26.092891,
+          lng: 85.948970
         },
         zoom: 13,
-        apikey:"",
-        athleteHidden: false
+        apikey:""
       }
-      this.athleteDashView = this.athleteDashView.bind(this)
       this.changeMapCenterLocation = this.changeMapCenterLocation.bind(this)
     }
 
@@ -32,29 +35,32 @@ class Homepage extends Component {
 
     render(){
       return(
-        <div>
+        <div id="homepage-full-body">
           <div className="row">
-            <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places"></script>
-              <div style={{ height: '50vh', width: '80%',float: 'right'}}>
-                <GoogleMapReact
-                  bootstrapURLKeys={{key: this.state.apikey}}
-                  center={this.state.center}
-                  defaultZoom={this.state.zoom}
-                  >
-                </GoogleMapReact>
-              </div>
-            <Button variant="contained" color="primary" onClick={this.athleteDashView} >
-              ATHLETE DASH
-            </Button>
-          </div>
-          <div className="row">
-            <div id="athlete-dashboard">
-              {this.state.athleteHidden &&
-                <AthleteDash
-                  changeMapCenterLocation={this.changeMapCenterLocation}
-                  />}
+            <div id="signups-container" className="column large-3">
+              <h1>THIS IS GOING TO BE THE USERS SIGNUPS</h1>
+            </div>
+            <Paper className="column large-6 small-12 medium-10 large-center" id="google-map-main-container" style={{overflow: 'hidden'}}>
+              <GoogleMapReact className="google-map"
+                bootstrapURLKeys={{key: this.state.apikey}}
+                center={this.state.center}
+                defaultZoom={this.state.zoom}
+                />
+            </Paper>
+            <div id="practices-container" className="column large-3">
+              <PracticesContainer />
             </div>
           </div>
+          <ExpansionPanel >
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography >ATHLETE DASHBOARD</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <AthleteDash
+                changeMapCenterLocation={this.changeMapCenterLocation}
+                />
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
         </div>)
     }
 }

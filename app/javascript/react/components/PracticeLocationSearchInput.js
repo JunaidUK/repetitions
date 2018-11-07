@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 
-class LocationSearchInput extends React.Component {
+class PracticeLocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,19 +17,14 @@ class LocationSearchInput extends React.Component {
   };
 
   handleSelect = address => {
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(geoLocation => {
-        return this.props.changeAthleteLocation(geoLocation)
-      })
-      .catch(error => console.error('Error', error));
+    this.props.handleLocationChange(address)
   };
 
   render() {
     return (
-    <div className="column large-4">
+    <div className="">
     <label>
-    Add or Change your profile location
+    Add a location to your practice
       <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
@@ -74,4 +69,4 @@ class LocationSearchInput extends React.Component {
   }
 }
 
-export default LocationSearchInput
+export default PracticeLocationSearchInput

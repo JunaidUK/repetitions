@@ -1,4 +1,20 @@
+<nav class="top-bar">
+<ul class="title-area">
+  <li class="name">
+    <h1><a id="navbar-text" href="/">REPITITIONS</a></h1>
+  </li>
+</ul>
 
+<section  id="sign" class="top-bar-section">
+  <ul class="right">
+    <%- if current_athlete -%>
+      <li><%= link_to 'SIGN OUT', destroy_athlete_session_path, method: :delete %></li>
+    <%- else -%>
+      <li id="sign-up"><%= link_to 'SIGN UP', new_athlete_registration_path %></li>
+      <li><%= link_to 'SIGN IN', new_athlete_session_path %></li>
+    <%- end -%>
+  </ul>
+</section>
 <script type="text/javascript" src=<%="https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_MAPS_API"]}&libraries=places"%>></script>
 </nav>
 <div id="app"></div>

@@ -44,6 +44,7 @@ class PracticesForm extends Component {
   }
 
   handleDateChange(momentObj){
+    debugger
     this.setState({date_time: momentObj.format()})
   }
 

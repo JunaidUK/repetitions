@@ -37,7 +37,7 @@ class Homepage extends Component {
 
     render(){
       return(
-        <div>
+        <div id="homepage-full-body">
           <div className="row">
             <div id="signups-container" className="column large-3">
               <h1>THIS IS GOING TO BE THE USERS SIGNUPS</h1>

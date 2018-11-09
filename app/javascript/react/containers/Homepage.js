@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import AthleteDash from './AthleteDash'
 import PracticesContainer from './PracticesContainer'
+import SignupsContainer from './SignupsContainer'
 
 class Homepage extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class Homepage extends Component {
         <div id="homepage-full-body">
           <div className="row">
             <div id="signups-container" className="column large-3">
-              <h1>THIS IS GOING TO BE THE USERS SIGNUPS</h1>
+              <SignupsContainer />
             </div>
             <Paper className="column large-6 small-12 medium-10 large-center" id="google-map-main-container" style={{overflow: 'hidden'}}>
               <GoogleMapReact className="google-map"

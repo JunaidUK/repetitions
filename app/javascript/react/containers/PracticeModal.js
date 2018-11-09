@@ -54,10 +54,10 @@ class PracticeModal extends React.Component {
          onAfterOpen={this.afterOpenModal}
          onRequestClose={this.closeModal}
          style={practiceFormStyles}
-         contentLabel="Example Modal"
        >
          <h6>ADD A PRACTICE</h6>
          <PracticesForm
+           modalCloseHandler={this.closeModal}
            setPractices={this.props.setPractices}/>
          <button onClick={this.closeModal}>close</button>
        </Modal>

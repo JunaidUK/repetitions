@@ -1,5 +1,5 @@
 class PracticeSerializer < ActiveModel::Serializer
-  attributes :id, :date_time, :location
+  attributes :id, :date_time, :location, :latitude, :longitude
 
   has_one :sport
 

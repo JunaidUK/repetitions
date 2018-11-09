@@ -102,7 +102,7 @@ class PracticesContainer extends Component {
     return(
       <div>
         <h5>CLICK TO JOIN A PRACTICE</h5>
-        <List>
+        <List style={{maxHeight: '50vh', overflow: 'auto'}}>
           {practiceList}
         </List>
         <PracticeModal

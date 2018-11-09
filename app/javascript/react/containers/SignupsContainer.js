@@ -56,7 +56,7 @@ class SignupsContainer extends Component {
     return(
       <div>
         <h5>UPCOMING PRACTICES</h5>
-        <List>
+        <List style={{maxHeight: '50vh', overflow: 'auto'}}>
           {signupList}
         </List>
       </div>

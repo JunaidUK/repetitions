@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :exercises
       resources :equipments
       resources :practices
+      resources :signups
     end
   end
 

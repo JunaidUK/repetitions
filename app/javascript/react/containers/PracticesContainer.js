@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment';
 
 import PracticesForm from '../components/PracticesForm'
+import SignupButton from '../components/SignupButton'
 import PracticeModal from './PracticeModal'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,6 +17,7 @@ class PracticesContainer extends Component {
         practices: []
       }
       this.setPractices = this.setPractices.bind(this)
+      this.addSignUp = this.addSignUp.bind(this)
     }
 
   componentDidMount(){
@@ -40,6 +43,35 @@ class PracticesContainer extends Component {
     this.setState({practices: newPractices})
   }
 
+  addSignUp(practiceId){
+    let payload = {
+      practice_id: practiceId
+    }
+    fetch ('/api/v1/signups', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      credentials: 'same-origin',
+      headers: {
+       'Content-Type': 'application/json',
+       'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => {
+      debugger
+    return response.json()
+    })
+    .catch(error => console.error('Error:', error));
+  }
+
   render(){
     let practiceList = this.state.practices.map((practice)=>{
       let athleteNames = practice.athletes.map((athlete)=>{
@@ -48,7 +80,7 @@ class PracticesContainer extends Component {
         </Typography>)
       })
     return(
-      <ListItem key={practice.id}>
+      <ListItem key={practice.id} className="paper-list-items-homepage">
         <Paper>
           <Typography variant="h5" component="h3">
             {practice.sport.name}
@@ -60,12 +92,16 @@ class PracticesContainer extends Component {
           <Typography component="p">
             Time - {practice.date_time}
           </Typography>
+          <SignupButton
+            practiceId={practice.id}
+            addSignUp={this.addSignUp} />
         </Paper>
       </ListItem>)
     })
 
     return(
       <div>
+        <h5>CLICK TO JOIN A PRACTICE</h5>
         <List>
           {practiceList}
         </List>

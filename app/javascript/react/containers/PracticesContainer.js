@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Moment from 'react-moment';
+import * as moment from 'moment';
 
 import PracticesForm from '../components/PracticesForm'
 import SignupButton from '../components/SignupButton'
@@ -74,6 +74,7 @@ class PracticesContainer extends Component {
 
   render(){
     let practiceList = this.state.practices.map((practice)=>{
+      let time = moment(practice.date_time)
       let athleteNames = practice.athletes.map((athlete)=>{
         return(<Typography component="p" key={practice.id}>
         Athlete: {athlete.first_name} {athlete.last_name}
@@ -90,7 +91,7 @@ class PracticesContainer extends Component {
             {practice.location}
           </Typography>
           <Typography component="p">
-            Time - {practice.date_time}
+            Time - {time.format("dddd, MMMM Do YYYY, h:mm a")}
           </Typography>
           <SignupButton
             practiceId={practice.id}

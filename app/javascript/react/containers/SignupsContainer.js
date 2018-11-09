@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Moment from 'react-moment';
+import * as moment from 'moment';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -37,6 +37,7 @@ class SignupsContainer extends Component {
 
   render(){
     let signupList = this.state.signups.practices.map((practice)=>{
+    let time = moment(practice.date_time)
     return(
       <ListItem key={practice.id} className="paper-list-items-homepage">
         <Paper>
@@ -47,7 +48,7 @@ class SignupsContainer extends Component {
             {practice.location}
           </Typography>
           <Typography component="p">
-            Time - {practice.date_time}
+            Time - {time.format("dddd, MMMM Do YYYY, h:mm a")}
           </Typography>
         </Paper>
       </ListItem>)

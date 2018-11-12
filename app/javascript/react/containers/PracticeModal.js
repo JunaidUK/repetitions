@@ -59,7 +59,7 @@ class PracticeModal extends React.Component {
          <PracticesForm
            modalCloseHandler={this.closeModal}
            setPractices={this.props.setPractices}/>
-         <button className="button right"onClick={this.closeModal}>CANCEL</button>
+         <button id="close-modal-button" className="button small left"onClick={this.closeModal}>CANCEL</button>
        </Modal>
      </div>
    );

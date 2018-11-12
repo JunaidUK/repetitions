@@ -62,7 +62,6 @@ class PracticesForm extends Component {
     geocodeByAddress(this.state.location)
       .then(results => getLatLng(results[0]))
       .then(geoLocation => {
-        debugger
          return payload = {
           latitude: geoLocation.lat,
           longitude: geoLocation.lng,
@@ -118,12 +117,12 @@ class PracticesForm extends Component {
           <PracticeLocationSearchInput
             handleLocationChange={this.handleLocationChange}
            />
-          <Datetime
+         <Datetime
             input={false}
             onChange={this.handleDateChange}
             utc={true}
           />
-        <input id="new-practice-button" className="button left" type="submit" value="SUBMIT" onClick={this.submitHandler}/>
+        <input id="new-practice-button" className="button small right" type="submit" value="SUBMIT" onClick={this.submitHandler}/>
         </form>
 
 

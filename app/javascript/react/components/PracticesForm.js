@@ -123,7 +123,7 @@ class PracticesForm extends Component {
             onChange={this.handleDateChange}
             utc={true}
           />
-          <input id="new-practice-button" className="button" type="submit" value="Submit" onClick={this.submitHandler}/>
+        <input id="new-practice-button" className="button left" type="submit" value="SUBMIT" onClick={this.submitHandler}/>
         </form>
 
 

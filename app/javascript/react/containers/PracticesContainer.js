@@ -102,8 +102,8 @@ class PracticesContainer extends Component {
 
     return(
       <div>
-        <h5>CLICK TO JOIN A PRACTICE</h5>
-        <List style={{maxHeight: '50vh', overflow: 'auto'}}>
+        <h6 className="list-title">CLICK TO JOIN A PRACTICE</h6>
+        <List className="practice-lists"style={{maxHeight: '50vh', overflow: 'auto'}}>
           {practiceList}
         </List>
         <PracticeModal

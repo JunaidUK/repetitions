@@ -8,7 +8,7 @@ const EquipmentForm = (props) => {
         Add equipment to your profile:
         <input name="equipment" type='text' onChange={props.equipmentChangeHandler}/>
         </label>
-        <input id="new-equipment-button" className="button" type="submit" value="Submit" onClick={props.equipmentSubmitHandler}/>
+        <input id="new-equipment-button" className="button small" type="submit" value="Submit" onClick={props.equipmentSubmitHandler}/>
       </form>
     </div>
   )

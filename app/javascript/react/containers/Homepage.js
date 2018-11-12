@@ -42,7 +42,7 @@ class Homepage extends Component {
               <SignupsContainer />
             </div>
             <Paper className="column large-6 small-12 medium-10 large-center" id="google-map-main-container" style={{overflow: 'hidden'}}>
-              <GoogleMapReact className="google-map"
+              <GoogleMapReact className="google-map"  options={{ fullscreenControl: false }}
                 bootstrapURLKeys={{key: this.state.apikey}}
                 center={this.state.center}
                 defaultZoom={this.state.zoom}
@@ -57,7 +57,7 @@ class Homepage extends Component {
               <Typography >ATHLETE DASHBOARD</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <AthleteDash
+              <AthleteDash id="athlete-dash-dropdown-select"
                 changeMapCenterLocation={this.changeMapCenterLocation}
                 />
             </ExpansionPanelDetails>

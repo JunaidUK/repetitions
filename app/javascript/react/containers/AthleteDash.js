@@ -13,6 +13,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Paper from '@material-ui/core/Paper';
 
 import ExercisesForm from '../components/ExercisesForm'
 import EquipmentForm from '../components/EquipmentForm'
@@ -237,51 +238,57 @@ class AthleteDash extends Component {
             </ListItem>)
         })
     return(
-      <div>
+      <div id="athlete-dash-return-container">
         <div id="athlete-attributes" className="row">
-          <div className="column large-4">
-            <div>
-              <h5 id="athlete-information-subheaders">Information</h5>
-              <h6>{`${this.state.currentAthlete.first_name} ${this.state.currentAthlete.last_name}`}</h6>
-              <p>{this.state.currentAthlete.email}</p>
-            </div>
-            <FormLabel component="legend">EDIT ATHLETE INFORMATION</FormLabel>
+          <div className="columns large-4">
+            <Paper>
+              <div>
+                <h5 className="athlete-information-subheaders">Information</h5>
+                <h6>{`${this.state.currentAthlete.first_name} ${this.state.currentAthlete.last_name}`}</h6>
+                <p>{this.state.currentAthlete.email}</p>
+              </div>
+              <FormLabel component="legend">Edit Athlete Information</FormLabel>
               <FormControlLabel
                 control={
                   <Switch checked={this.state.athleteEditHidden} onChange={this.athleteEditView} aria-label="LoginSwitch" />
                 }
                 label={this.state.athleteEditHidden ? 'Close' : 'Open'}
-              />
-              <a href="/athletes/edit">Edit Personal Information</a>
+                />
+              <a id="personal-info-edit"className="button small" href="/athletes/edit">Edit Personal Information</a>
+            </Paper>
           </div>
-          <div className="column large-4">
-            <h5 id="athlete-information-subheaders">Athlete Sports</h5>
-            <List dense={false}>
-              {athleteSports}
-            </List>
+          <div className="columns large-4">
+            <Paper>
+              <h5 className="athlete-information-subheaders">Athlete Sports</h5>
+              <List dense={false}>
+                {athleteSports}
+              </List>
+            </Paper>
           </div>
-          <div className="column large-4">
-            <h5 id="athlete-information-subheaders">Athlete Equipment</h5>
-            <List dense={false}>
-              {athleteEquipments}
-            </List>
+          <div className="columns large-4">
+            <Paper>
+              <h5 className="athlete-information-subheaders">Athlete Equipment</h5>
+              <List dense={false}>
+                {athleteEquipments}
+              </List>
+            </Paper>
           </div>
         </div>
-        <div id="athlete-profile-forms" className="row">
+        <div id="athlete-profile-forms">
           {
             this.state.athleteEditHidden &&
             <div>
-              <EquipmentForm
-                equipmentChangeHandler={this.equipmentChangeHandler}
-                equipmentSubmitHandler={this.equipmentSubmitHandler}
-              />
-              <ExercisesForm
-                currentAthleteId={this.state.currentAthlete.id}
-                exerciseSubmitHandler={this.exerciseSubmitHandler}
-              />
               <LocationSearchInput
                 changeAthleteLocation={this.changeAthleteLocation}
               />
+              <ExercisesForm
+                  currentAthleteId={this.state.currentAthlete.id}
+                  exerciseSubmitHandler={this.exerciseSubmitHandler}
+                />
+                <EquipmentForm
+                  equipmentChangeHandler={this.equipmentChangeHandler}
+                  equipmentSubmitHandler={this.equipmentSubmitHandler}
+                />  
             </div>
           }
         </div>

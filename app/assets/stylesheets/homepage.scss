@@ -2,11 +2,23 @@
   background-color: #d7efdf;
   margin-top: 2px;
 }
+.top-bar{
+  background-color: #7381ca;
+}
 
-.paper-list-items-homepage{
-
+#sign a {
+   background-color: #7381ca;
 }
 
 #add-signup-button{
-  color: #4253AF
+  color: #4253AF;
+}
+
+#add-practice-button {
+  margin: 0 auto;
+  display: block;
+}
+
+#add-practice-header {
+  text-align: center;
 }

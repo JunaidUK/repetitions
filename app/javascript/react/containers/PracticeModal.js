@@ -45,21 +45,21 @@ class PracticeModal extends React.Component {
 
  render() {
    return (
-     <div>
-     <Button id="add-practice-button" variant="contained" color="primary" onClick={this.openModal} style={{justifyContent: 'center'}} >
-      Add a Practice
-     </Button>
+     <div id="add-a-practice-modal">
+       <Button id="add-practice-button" variant="contained" color="primary" onClick={this.openModal} style={{justifyContent: 'center'}} >
+        Add a Practice
+       </Button>
        <Modal
          isOpen={this.state.modalIsOpen}
          onAfterOpen={this.afterOpenModal}
          onRequestClose={this.closeModal}
          style={practiceFormStyles}
        >
-         <h6>ADD A PRACTICE</h6>
+         <h6 id="add-practice-header">ADD A PRACTICE</h6>
          <PracticesForm
            modalCloseHandler={this.closeModal}
            setPractices={this.props.setPractices}/>
-         <button onClick={this.closeModal}>close</button>
+         <button className="button right"onClick={this.closeModal}>CANCEL</button>
        </Modal>
      </div>
    );

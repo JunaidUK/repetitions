@@ -58,11 +58,11 @@ class ExercisesForm extends Component {
         <form className="form" id="sports-form">
           <label>
           Select a sport to add to your profile:
-            <select onChange={this.changeHandler}>
+            <select id="athlete-sport-options" onChange={this.changeHandler}>
               {sportsOptions}
             </select>
           </label>
-          <input id="new-comment-button" className="button" type="submit" value="Submit" onClick={this.submitHandler}/>
+          <input id="new-sport-button" className="button small" type="submit" value="Submit" onClick={this.submitHandler}/>
         </form>
       </div>
     )

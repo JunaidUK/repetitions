@@ -44,7 +44,6 @@ class PracticesForm extends Component {
   }
 
   handleDateChange(momentObj){
-    debugger
     this.setState({date_time: momentObj.format()})
   }
 
@@ -60,7 +59,9 @@ class PracticesForm extends Component {
     event.preventDefault()
     let payload;
     geocodeByAddress(this.state.location)
-      .then(results => getLatLng(results[0]))
+      .then(results =>{
+        return getLatLng(results[0])
+      })
       .then(geoLocation => {
          return payload = {
           latitude: geoLocation.lat,

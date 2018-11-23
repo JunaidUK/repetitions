@@ -15,7 +15,6 @@ class Api::V1::PracticesController < ApplicationController
       signup.practice_id = @practice.id
       signup.owner = true
       signup.save
-      binding.pry
       render json: @practice
     else
       binding.pry

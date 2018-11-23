@@ -39,7 +39,7 @@ class PracticesContainer extends Component {
   }
 
   setPractices(practiceObj){
-    let newPractices = practices.concat(practiceObj)
+    let newPractices = this.state.practices.concat(practiceObj.practice)
     this.setState({practices: newPractices})
   }
 
@@ -66,8 +66,7 @@ class PracticesContainer extends Component {
       }
     })
     .then(response => {
-      debugger
-    return response.json()
+      return response.json()
     })
     .catch(error => console.error('Error:', error));
   }

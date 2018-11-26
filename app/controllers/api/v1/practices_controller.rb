@@ -17,7 +17,6 @@ class Api::V1::PracticesController < ApplicationController
       signup.save
       render json: @practice
     else
-      binding.pry
       redirect_to "/"
     end
   end

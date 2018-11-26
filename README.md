@@ -33,3 +33,6 @@ This application is my capstone project for Launch Academy. This application is 
 ![Main Page](https://imgur.com/WTgkYaK.jpg)
 ##### Athlete Dashboard
 ![Main Page](https://imgur.com/dHaf0lE.jpg)
+
+### Acknowledgements
+A very warm thank you to all my peers and educators who helped me reach this point. Looking forward to the road ahead!
